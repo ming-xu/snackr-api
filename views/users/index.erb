@@ -1,0 +1,8 @@
+<ul>
+<% @users.each do |user| %>
+ <li>
+   <h4><a href="/users/<%= user.id %>"><%= user.name %></a></h4>
+   <p>Number of Votes: <%= user.number_of_votes %></p>
+ </li>
+<% end %>
+</ul>
