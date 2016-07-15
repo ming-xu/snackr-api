@@ -63,7 +63,7 @@ get "/userbyname/:name" do
 	headers 'Access-Control-Allow-Methods' => 'GET,POST,PUT,DELETE,OPTIONS'
 	headers 'Access-Control-Allow-Credentials' => 'true'
 
-	User.where(:id => params['name']).first.to_json
+	User.where(:name => params['name']).first.to_json
 end
 
 get "/item/:id" do
