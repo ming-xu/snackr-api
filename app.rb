@@ -5,6 +5,14 @@ require 'sinatra/activerecord'
 require './environments'
 require 'json'
 
+options "*" do
+  response.headers["Allow"] = "HEAD,GET,PUT,DELETE,OPTIONS"
+
+  # Needed for AngularJS
+  response.headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept"
+
+  halt HTTP_STATUS_OK
+end
 
 class User < ActiveRecord::Base
 end
@@ -79,7 +87,6 @@ get "/allcategories" do
 		categoryList.push(categoryObj)
 	end
 	returnmessage = categoryList.to_json
-	returnmessage['Access-Control-Allow-Origin'] = 'http://localhost'
 end
 
 
