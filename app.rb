@@ -10,6 +10,7 @@ options "*" do
 
   # Needed for AngularJS
   response.headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept"
+  response.headers["Access-Control-Allow-Origin"] = "*"
 
   halt HTTP_STATUS_OK
 end
