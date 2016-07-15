@@ -10,15 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160715073901) do
+ActiveRecord::Schema.define(version: 20160715165149) do
 
-  create_table "categorys", force: :cascade do |t|
+  create_table "categories", force: :cascade do |t|
     t.string "name"
   end
 
-  create_table "itemcomments", force: :cascade do |t|
+  create_table "item_comments", force: :cascade do |t|
     t.integer "item_id"
     t.text    "comment"
+  end
+
+  create_table "item_votes", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "vote_count"
   end
 
   create_table "items", force: :cascade do |t|
@@ -29,34 +34,31 @@ ActiveRecord::Schema.define(version: 20160715073901) do
     t.string  "status"
   end
 
-  create_table "itemvotes", force: :cascade do |t|
-    t.integer "item_id"
-    t.integer "vote_count"
-  end
-
-  create_table "orderitems", force: :cascade do |t|
+  create_table "order_items", force: :cascade do |t|
     t.integer "item_id"
     t.date    "date"
+    t.integer "order_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string  "type"
+    t.string  "order_type"
     t.string  "name"
     t.decimal "price"
     t.date    "date"
+  end
+
+  create_table "user_votes", force: :cascade do |t|
+    t.integer  "item_id"
+    t.integer  "number_of_votes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string  "name"
     t.string  "role"
     t.integer "number_of_votes"
-  end
-
-  create_table "uservotes", force: :cascade do |t|
-    t.integer  "item_id"
-    t.integer  "number_of_votes"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
 end
