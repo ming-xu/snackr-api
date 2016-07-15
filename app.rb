@@ -145,7 +145,10 @@ get "/itemsbycategory/:name" do
 	headers 'Access-Control-Allow-Credentials' => 'true'
 
 	category = Category.where(:name => params['name'])
-	Item.where(:category_id => category['id']).to_json
+	p category
+	if (category != nil)
+	Item.where(:category_id => category.first['id']).to_json 
+	end
 end
 
 get "/allcategories" do
@@ -166,12 +169,12 @@ get "/allcategories" do
 end
 
 
-post "/user" do
+post "/postuser" do
 	headers 'Access-Control-Allow-Origin' => 'http://localhost:8015'
 	headers 'Access-Control-Allow-Headers' => 'Authorization,Accepts,Content-Type,X-CSRF-Token,X-Requested-With'
 	headers 'Access-Control-Allow-Methods' => 'GET,POST,PUT,DELETE,OPTIONS'
 	headers 'Access-Control-Allow-Credentials' => 'true'
-
+	p request.body.read
 	payload = JSON.parse(request.body.read)
 	User.create(name: payload["name"], role: payload["role"], number_of_up_votes: payload["number_of_up_votes"], number_of_down_votes: payload["number_of_down_votes"])
 	returnmessage = 'success'
