@@ -57,7 +57,7 @@ get "/user/:id" do
 	User.where(:id => params['id']).first.to_json
 end
 
-get "/user/:name" do
+get "/userbyname/:name" do
 	headers 'Access-Control-Allow-Origin' => 'http://localhost:8015'
 	headers 'Access-Control-Allow-Headers' => 'Authorization,Accepts,Content-Type,X-CSRF-Token,X-Requested-With'
 	headers 'Access-Control-Allow-Methods' => 'GET,POST,PUT,DELETE,OPTIONS'
