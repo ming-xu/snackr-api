@@ -239,7 +239,7 @@ post "/category" do
 	headers 'Access-Control-Allow-Credentials' => 'true'
 
 	payload = JSON.parse(request.body.read)
-	Category.create(name: payload["name"], special: payload["special"], singular_name: payload["singular_name"], icon: payload["icon"],))
+	Category.create(name: payload["name"], special: payload["special"], singular_name: payload["singular_name"], icon: payload["icon"])
 	returnmessage = 'success'
 end
 
