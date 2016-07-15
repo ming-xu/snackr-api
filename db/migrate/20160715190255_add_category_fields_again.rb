@@ -3,6 +3,7 @@ class AddCategoryFieldsAgain < ActiveRecord::Migration
   	add_column :categories, :special, :boolean
   	add_column :categories, :singular_name, :string
   	add_column :categories, :icon, :string
-  	change_column :items, :status, 'boolean USING CAST(status AS boolean)'
+  	remove_column :items, :status
+  	add_column :items, :status, :boolean
   end
 end
