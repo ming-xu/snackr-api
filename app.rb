@@ -42,7 +42,7 @@ get "/item/:id" do
 	Item.where(:id => params['id']).first.to_json
 end
 
-get "/item" do
+get "/items" do
 	Item.all.to_json
 end
 
@@ -54,12 +54,16 @@ get "/itemcomment/:id" do
 	ItemComment.where(:item_id => params['id']).first.to_json
 end
 
-get "/uservote/:id" do
+get "/uservotes/:id" do
 	UserVote.where(:user_id => params['id']).to_json
 end
 
 get "/order/:id" do
 	OrderItem.where(:id => params['id']).to_json
+end
+
+get "/orders" do
+	Order.all.to_json
 end
 
 get "/category/:name" do
@@ -70,11 +74,12 @@ get "/allcategories" do
 	categoryList = Array.new
 	categories = Category.all
 	categories.each do |category|
-		topItem = Item.where(:category_id => category["id"]).order("item_votes DESC").first;
+		topItem = Item.where(:category_id => category["id"]).order("item_total_votes DESC").first;
 		categoryObj = {:category => category, :topItem => topItem}
 		categoryList.push(categoryObj)
 	end
 	returnmessage = categoryList.to_json
+	returnmessage['Access-Control-Allow-Origin'] = 'http://localhost'
 end
 
 

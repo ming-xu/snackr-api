@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160715202634) do
+ActiveRecord::Schema.define(version: 20160715210543) do
 
   create_table "categories", force: :cascade do |t|
     t.string  "name"
@@ -35,7 +35,9 @@ ActiveRecord::Schema.define(version: 20160715202634) do
     t.text    "description"
     t.binary  "picture"
     t.boolean "status"
-    t.integer "item_votes"
+    t.integer "item_up_votes"
+    t.integer "item_down_votes"
+    t.integer "item_total_votes"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -53,16 +55,17 @@ ActiveRecord::Schema.define(version: 20160715202634) do
 
   create_table "user_votes", force: :cascade do |t|
     t.integer  "item_id"
-    t.integer  "number_of_votes"
+    t.integer  "number_of_up_votes"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "number_of_down_votes"
   end
 
   create_table "users", force: :cascade do |t|
     t.string  "name"
     t.string  "role"
-    t.integer "number_of_votes"
+    t.integer "number_of_down_votes"
   end
 
 end
