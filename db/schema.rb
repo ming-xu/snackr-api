@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160715210543) do
+ActiveRecord::Schema.define(version: 20160715234521) do
 
   create_table "categories", force: :cascade do |t|
     t.string  "name"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20160715210543) do
     t.string  "name"
     t.string  "role"
     t.integer "number_of_down_votes"
+    t.integer "number_of_up_votes"
   end
 
 end
