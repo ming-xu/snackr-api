@@ -10,10 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160715165149) do
+ActiveRecord::Schema.define(version: 20160715202634) do
 
   create_table "categories", force: :cascade do |t|
-    t.string "name"
+    t.string  "name"
+    t.boolean "special"
+    t.string  "singular_name"
+    t.string  "icon"
   end
 
   create_table "item_comments", force: :cascade do |t|
@@ -31,7 +34,8 @@ ActiveRecord::Schema.define(version: 20160715165149) do
     t.string  "name"
     t.text    "description"
     t.binary  "picture"
-    t.string  "status"
+    t.boolean "status"
+    t.integer "item_votes"
   end
 
   create_table "order_items", force: :cascade do |t|
