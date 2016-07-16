@@ -75,7 +75,7 @@ get "/item/:id" do
 	Item.where(:id => params['id']).first.to_json
 end
 
-get "/item/:name" do
+get "/itembyname/:name" do
 	headers 'Access-Control-Allow-Origin' => 'http://localhost:8015'
 	headers 'Access-Control-Allow-Headers' => 'Authorization,Accepts,Content-Type,X-CSRF-Token,X-Requested-With'
 	headers 'Access-Control-Allow-Methods' => 'GET,POST,PUT,DELETE,OPTIONS'
