@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160715234521) do
+ActiveRecord::Schema.define(version: 20160716201535) do
 
   create_table "categories", force: :cascade do |t|
     t.string  "name"
@@ -34,10 +34,10 @@ ActiveRecord::Schema.define(version: 20160715234521) do
     t.string  "name"
     t.text    "description"
     t.binary  "picture"
-    t.boolean "status"
-    t.integer "item_up_votes"
-    t.integer "item_down_votes"
-    t.integer "item_total_votes"
+    t.boolean "status",           default: false
+    t.integer "item_up_votes",    default: 0
+    t.integer "item_down_votes",  default: 0
+    t.integer "item_total_votes", default: 0
   end
 
   create_table "order_items", force: :cascade do |t|
