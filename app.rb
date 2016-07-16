@@ -297,6 +297,51 @@ put "/user/:id" do
 	returnmessage = 'success'
 end
 
+post "/itemupdate/:id" do
+	headers 'Access-Control-Allow-Origin' => 'http://localhost:8015'
+	headers 'Access-Control-Allow-Headers' => 'Authorization,Accepts,Content-Type,X-CSRF-Token,X-Requested-With'
+	headers 'Access-Control-Allow-Methods' => 'GET,POST,PUT,DELETE,OPTIONS'
+	headers 'Access-Control-Allow-Credentials' => 'true'
+
+	item = Item.find(params['id'])
+	payload = JSON.parse(request.body.read)
+	unless payload["category_id"].nil?
+		item.update(category_id: payload["category_id"])
+	end
+	unless payload["name"].nil?
+		item.update(name: payload["name"])
+	end
+	unless payload["description"].nil?
+		item.update(description: payload["description"])
+	end
+	unless payload["picture"].nil?
+		item.update(picture: payload["picture"])
+	end
+	unless payload["status"].nil?
+		item.update(status: payload["status"])
+	end
+	if !payload["item_up_votes"].nil? && payload["item_total_votes"].nil?
+		item.update(item_up_votes: payload["item_up_votes"])
+		total = payload["item_up_votes"] - item["item_down_votes"]
+		item.update(item_total_votes: total)
+	end
+	if !payload["item_up_votes"].nil? && !payload["item_total_votes"].nil?
+		item.update(item_up_votes: payload["item_up_votes"])
+	end
+	if !payload["item_down_votes"].nil? && payload["item_total_votes"].nil?
+		item.update(item_down_votes: payload["item_down_votes"])
+		total = item["item_up_votes"] - payload["item_down_votes"]
+		item.update(item_total_votes: total)
+	end
+	if !payload["item_down_votes"].nil? && !payload["item_total_votes"].nil?
+		item.update(item_down_votes: payload["item_down_votes"])
+	end
+	unless payload["item_total_votes"].nil?
+		item.update(item_total_votes: payload["item_total_votes"])
+	end
+	returnmessage = 'success'
+end
+
 put "/item/:id" do
 	headers 'Access-Control-Allow-Origin' => 'http://localhost:8015'
 	headers 'Access-Control-Allow-Headers' => 'Authorization,Accepts,Content-Type,X-CSRF-Token,X-Requested-With'
