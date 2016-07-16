@@ -84,6 +84,15 @@ get "/items" do
 	Item.all.to_json
 end
 
+get "/top5items" do
+	headers 'Access-Control-Allow-Origin' => 'http://localhost:8015'
+	headers 'Access-Control-Allow-Headers' => 'Authorization,Accepts,Content-Type,X-CSRF-Token,X-Requested-With'
+	headers 'Access-Control-Allow-Methods' => 'GET,POST,PUT,DELETE,OPTIONS'
+	headers 'Access-Control-Allow-Credentials' => 'true'
+
+	Item.all.order("item_total_votes desc").to_json
+end
+
 get "/itemvote/:id" do
 	headers 'Access-Control-Allow-Origin' => 'http://localhost:8015'
 	headers 'Access-Control-Allow-Headers' => 'Authorization,Accepts,Content-Type,X-CSRF-Token,X-Requested-With'
