@@ -322,14 +322,16 @@ put "/item/:id" do
 	end
 	if !payload["item_up_votes"].nil? && payload["item_total_votes"].nil?
 		item.update(item_up_votes: payload["item_up_votes"])
-		item.update(item_total_votes: payload["item_up_votes"]-item["item_down_votes"])
+		total = payload["item_up_votes"] - item["item_down_votes"]
+		item.update(item_total_votes: total)
 	end
 	if !payload["item_up_votes"].nil? && !payload["item_total_votes"].nil?
 		item.update(item_up_votes: payload["item_up_votes"])
 	end
 	if !payload["item_down_votes"].nil? && payload["item_total_votes"].nil?
 		item.update(item_down_votes: payload["item_down_votes"])
-		item.update(item_total_votes: payload["item_up_votes"]-item["item_down_votes"])
+		total = item["item_up_votes"] - payload["item_down_votes"]
+		item.update(item_total_votes: total)
 	end
 	if !payload["item_down_votes"].nil? && !payload["item_total_votes"].nil?
 		item.update(item_down_votes: payload["item_down_votes"])
